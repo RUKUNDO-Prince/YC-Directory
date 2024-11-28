@@ -1,24 +1,31 @@
 import Image from "next/image";
 import SearchForm from "@/components/SearchForm";
 import StartupCard from "@/components/StartupCard";
+import { client } from "@/sanity/lib/client";
+import { STARTUPS_QUERY } from "@/sanity/lib/queries";
 
 export default async function Home({ searchParams }: {
   searchParams: Promise<{ query?: string }>;
 }) {
   const query = (await searchParams).query;
 
-  const posts = [
-    {
-      _createdAt: new Date(),
-      views: 55,
-      author: { _id: 1, name: "Prince" },
-      _id: 1,
-      description: "This is the description",
-      image: "https://www.rolandberger.com/img/Tiles/Tile-Content/Roland_Berger-24_2195_Humanoid_robots-ST.jpg",
-      category: "Robots",
-      title: 'We robots'
-    }
-  ]
+  const posts = await client.fetch(STARTUPS_QUERY)
+  console.log('====================================');
+  console.log(JSON.stringify(posts, null, 2));
+  console.log('====================================');
+
+  // const posts = [
+  //   {
+  //     _createdAt: new Date(),
+  //     views: 55,
+  //     author: { _id: 1, name: "Prince" },
+  //     _id: 1,
+  //     description: "This is the description",
+  //     image: "https://www.rolandberger.com/img/Tiles/Tile-Content/Roland_Berger-24_2195_Humanoid_robots-ST.jpg",
+  //     category: "Robots",
+  //     title: 'We robots'
+  //   }
+  // ]
 
   return (
     <>
