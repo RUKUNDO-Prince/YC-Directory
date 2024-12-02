@@ -16,7 +16,8 @@ import StartupCard, { StartupTypeCard } from "@/components/StartupCard";
 
 const md = markdownit();
 
-export const experimental_ppr = true;
+// export const experimental_ppr = true;
+export const runtime = 'edge';
 
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   try {
